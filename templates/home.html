@@ -1,0 +1,214 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- ========================= HERO SECTION ========================= -->
+<section class="hero-section py-5">
+    <div class="container">
+        <div class="row align-items-center hero-box">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <span class="hero-badge">AI Fashion Experience</span>
+                <h1 class="hero-title mt-3">Try Before You Buy</h1>
+                <p class="hero-subtitle">
+                    Explore your perfect style with Tryvion’s smart virtual try-on experience.
+                    Shop fashion confidently and preview outfits before purchasing.
+                </p>
+                <div class="hero-buttons mt-4">
+                    <a href="{% url 'store' %}" class="btn btn-dark btn-lg mr-3">Shop Now</a>
+                    <a href="#" class="btn btn-outline-dark btn-lg">Start Try-On</a>
+                </div>
+            </div>
+
+            <div class="col-lg-6 text-center">
+                <img src="{% static 'images/banners/banner2.jpg' %}" class="img-fluid hero-image" alt="Tryvion Banner">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================= FEATURE SECTION ========================= -->
+<section class="py-5">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="feature-box p-4">
+                    <i class="fa-solid fa-camera-retro feature-icon"></i>
+                    <h5 class="mt-3">Upload Your Look</h5>
+                    <p>Use your photo to preview fashion styles instantly.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-box p-4">
+                    <i class="fa-solid fa-shirt feature-icon"></i>
+                    <h5 class="mt-3">Choose Outfits</h5>
+                    <p>Browse trendy collections and try them virtually.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-box p-4">
+                    <i class="fa-solid fa-wand-magic-sparkles feature-icon"></i>
+                    <h5 class="mt-3">AI Try-On Magic</h5>
+                    <p>See how your selected outfit looks before you buy.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================= POPULAR PRODUCTS ========================= -->
+<section class="section-name py-5">
+    <div class="container">
+
+        <header class="section-heading d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h3 class="section-title mb-1">Popular Products</h3>
+                <p class="text-muted mb-0">Trending fashion picks for you</p>
+            </div>
+            <a href="{% url 'store' %}" class="btn btn-outline-dark">See All</a>
+        </header>
+
+        <div class="row">
+            {% for product in products %}
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card card-product-grid h-100">
+                    <a href="{{ product.get_url }}" class="img-wrap product-image-wrap">
+                        <img src="{{ product.images.url }}" class="product-image">
+                    </a>
+                    <div class="card-body text-center">
+                        <a href="{{ product.get_url }}" class="title product-title d-block mb-2">
+                            {{ product.product_name }}
+                        </a>
+                        <div class="price mb-3">₹{{ product.price }}</div>
+                        <a href="{{ product.get_url }}" class="btn btn-dark btn-sm px-4">View Product</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+
+<!-- ========================= CUSTOM STYLES ========================= -->
+<style>
+    .hero-box {
+        background: linear-gradient(135deg, #ffffff, #f3f4f6);
+        border-radius: 28px;
+        padding: 60px 50px;
+        box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+    }
+
+    .hero-badge {
+        display: inline-block;
+        background: #111827;
+        color: #fff;
+        padding: 8px 18px;
+        border-radius: 30px;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .hero-title {
+        font-size: 52px;
+        font-weight: 700;
+        color: #111827;
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: 17px;
+        color: #6b7280;
+        line-height: 1.8;
+        max-width: 520px;
+    }
+
+    .hero-image {
+        border-radius: 24px;
+        max-height: 500px;
+        object-fit: cover;
+        box-shadow: 0 14px 35px rgba(0,0,0,0.10);
+    }
+
+    .feature-box {
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+
+    .feature-box:hover {
+        transform: translateY(-6px);
+    }
+
+    .feature-icon {
+        font-size: 32px;
+        color: #111827;
+    }
+
+    .product-image-wrap {
+        background: #f9fafb;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 280px;
+    }
+
+    .product-image {
+        max-height: 240px;
+        width: auto;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+    }
+
+    .card:hover .product-image {
+        transform: scale(1.05);
+    }
+
+    .product-title {
+        font-weight: 600;
+        color: #111827;
+        font-size: 16px;
+    }
+
+    .product-title:hover {
+        color: #000;
+    }
+
+    .price {
+        font-size: 20px;
+        font-weight: 700;
+        color: #111827;
+    }
+
+    @media (max-width: 768px) {
+        .hero-box {
+            padding: 35px 25px;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 36px;
+        }
+
+        .hero-subtitle {
+            margin: auto;
+        }
+
+        .hero-buttons .btn {
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        .product-image-wrap {
+            height: 220px;
+        }
+
+        .product-image {
+            max-height: 180px;
+        }
+    }
+</style>
+
+{% endblock %}
